@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Form, Alert, InputGroup, Button, ButtonGroup } from "react-bootstrap";
-import BookDataService from "../services/book.services";
+import CourseRequestService from "../services/course.services";
 
-const AddBook = ({ id, setBookId }) => {
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
+const addCourses = ({ id, setCourseId }) => {
+  const [Course-title, setCourse-title] = useState("");
+  const [Course-instructor, setCourse-instructor] = useState("");
   const [status, setStatus] = useState("Available");
   const [flag, setFlag] = useState(true);
   const [message, setMessage] = useState({ error: false, msg: "" });
@@ -12,32 +12,32 @@ const AddBook = ({ id, setBookId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
-    if (title === "" || author === "") {
+    if (Course title === "" || Course instructor === "") {
       setMessage({ error: true, msg: "All fields are mandatory!" });
       return;
     }
-    const newBook = {
-      title,
-      author,
+    const newCourse = {
+      Course title,
+      Course instructor,
       status,
     };
-    console.log(newBook);
+    console.log(newCourse);
 
     try {
       if (id !== undefined && id !== "") {
-        await BookDataService.updateBook(id, newBook);
-        setBookId("");
+        await CourseRequestService.updateCourses(id, newCourse);
+        setCourseId("");
         setMessage({ error: false, msg: "Updated successfully!" });
       } else {
-        await BookDataService.addBooks(newBook);
-        setMessage({ error: false, msg: "New Book added successfully!" });
+        await CourseRequestService.addCourses(newCourse);
+        setMessage({ error: false, msg: "New Course requested successfully!" });
       }
     } catch (err) {
       setMessage({ error: true, msg: err.message });
     }
 
-    setTitle("");
-    setAuthor("");
+    setCoursetitle("");
+    setCourseinstructor("");
   };
 
   const editHandler = async () => {
@@ -73,26 +73,26 @@ const AddBook = ({ id, setBookId }) => {
         )}
 
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBookTitle">
+          <Form.Group className="mb-3" controlId="formCourseTitle">
             <InputGroup>
-              <InputGroup.Text id="formBookTitle">B</InputGroup.Text>
+              <InputGroup.Text id="formCourseTitle">B</InputGroup.Text>
               <Form.Control
                 type="text"
-                placeholder="Book Title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Course Title"
+                value={Course-title}
+                onChange={(e) => setCoursetitle(e.target.value)}
               />
             </InputGroup>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBookAuthor">
+          <Form.Group className="mb-3" controlId="formCourseInstructor">
             <InputGroup>
-              <InputGroup.Text id="formBookAuthor">A</InputGroup.Text>
+              <InputGroup.Text id="formCourseInstructor">A</InputGroup.Text>
               <Form.Control
                 type="text"
-                placeholder="Book Author"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
+                placeholder="Course Instructor"
+                value={Course-instructor}
+                onChange={(e) => setCourseinstructor(e.target.value)}
               />
             </InputGroup>
           </Form.Group>
