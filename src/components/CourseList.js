@@ -1,55 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
-import BookDataService from "../services/book.services";
+import CourseRequestService from "../services/course.services";
 
-const BooksList = ({ getBookId }) => {
-  const [books, setBooks] = useState([]);
+const CoursesList = ({ getCourseId }) => {
+  const [Courses, setCourses] = useState([]);
   useEffect(() => {
-    getBooks();
+    getCourses();
   }, []);
 
-  const getBooks = async () => {
-    const data = await BookDataService.getAllBooks();
+  const getCourses = async () => {
+    const data = await CourseRequestService.getAllCourses();
     console.log(data.docs);
-    setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    setCourses(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
   const deleteHandler = async (id) => {
-    await BookDataService.deleteBook(id);
-    getBooks();
+    await CourseRequestService.deleteCourse(id);
+    getCourses();
   };
   return (
     <>
       <div className="mb-2">
-        <Button variant="dark edit" onClick={getBooks}>
+        <Button variant="dark edit" onClick={getCourses}>
           Refresh List
         </Button>
       </div>
 
-      {/* <pre>{JSON.stringify(books, undefined, 2)}</pre>} */}
+      {/* <pre>{JSON.stringify(Courses, undefined, 2)}</pre>} */}
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
             <th>#</th>
-            <th>Book Title</th>
-            <th>Book Author</th>
+            <th>Course Title</th>
+            <th>Course Instructor</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {books.map((doc, index) => {
+          {Courses.map((doc, index) => {
             return (
               <tr key={doc.id}>
                 <td>{index + 1}</td>
-                <td>{doc.title}</td>
-                <td>{doc.author}</td>
+                <td>{doc.Course-title}</td>
+                <td>{doc.Course-instructor}</td>
                 <td>{doc.status}</td>
                 <td>
                   <Button
                     variant="secondary"
                     className="edit"
-                    onClick={(e) => getBookId(doc.id)}
+                    onClick={(e) => getCourseId(doc.id)}
                   >
                     Edit
                   </Button>
@@ -70,4 +70,4 @@ const BooksList = ({ getBookId }) => {
   );
 };
 
-export default BooksList;
+export default CoursesList;
