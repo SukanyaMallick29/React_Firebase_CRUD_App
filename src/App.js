@@ -1,35 +1,35 @@
 import { useState } from "react";
 import { Container, Navbar, Row, Col } from "react-bootstrap";
-import AddBook from "./components/AddBook";
-import BooksList from "./components/BooksList";
+import addCourses from "./components/AddCourses";
+import BooksList from "./components/CourseList";
 import "./App.css";
 
 function App() {
-  const [bookId, setBookId] = useState("");
+  const [CourseId, setCourseId] = useState("");
 
-  const getBookIdHandler = (id) => {
+  const getCourseIdHandler = (id) => {
     console.log("The ID of document to be edited: ", id);
-    setBookId(id);
+    setCourseId(id);
   };
   return (
     <>
       <Navbar bg="dark" variant="dark" className="header">
         <Container>
-          <Navbar.Brand href="#home">Library - Firebase CRUD</Navbar.Brand>
+          <Navbar.Brand href="#home">Library - Firebase </Navbar.Brand>
         </Container>
       </Navbar>
 
       <Container style={{ width: "400px" }}>
         <Row>
           <Col>
-            <AddBook id={bookId} setBookId={setBookId} />
+            <AddBook id={CourseId} setCourseId={setCourseId} />
           </Col>
         </Row>
       </Container>
       <Container>
         <Row>
           <Col>
-            <BooksList getBookId={getBookIdHandler} />
+            <BooksList getCourseId={getCourseIdHandler} />
           </Col>
         </Row>
       </Container>
